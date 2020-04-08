@@ -5,13 +5,20 @@ import queryString from 'query-string';
 export default class Authorization extends React.Component {
     constructor(props) {
         super(props);
-        const hash = window.location.hash && queryString.parse(window.location.hash.substring(1));
+
+        const hash = (
+            window.location.hash &&
+            queryString.parse(window.location.hash.substring(1))
+        );
+
+        console.log("setting hash", hash);
+
         if (hash && hash.access_token) {
-          localStorage.setItem('accessToken', hash.access_token);
+            localStorage.setItem('accessToken', hash.access_token);
         }
     }
 
     render() {
-        return <Redirect to='/' />
+        return <Redirect to='/' />;
     }
 }

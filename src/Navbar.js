@@ -4,12 +4,12 @@ import Nav from 'react-bootstrap/Nav';
 import NavItem from 'react-bootstrap/NavItem';
 import { LinkContainer } from "react-router-bootstrap";
 
-export default class Navbar extends React.Component {    
+export default class Navbar extends React.Component {
     render() {
         return (
             <BootstrapNavbar bg="dark" variant="dark">
                 <BootstrapNavbar.Brand>Simplify</BootstrapNavbar.Brand>
-                <BootstrapNavbar.Collapse className="justify-content-between">
+                <BootstrapNavbar.Collapse className='justify-content-between'>
                     <Nav>
                         <LinkContainer to="/playlists">
                             <Nav.Link>Playlists</Nav.Link>

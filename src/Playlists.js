@@ -22,10 +22,11 @@ export default class Playlists extends React.Component {
     }
 
     updatePlaylists() {
-        if (this.props.user && this.props.user.id) {
-            getPlaylists(this.props.user.id).then(result => {
-                console.log("result!", result);
-                this.setState({playlists: result.items});
+        if (this.props.user) {
+            getPlaylists(this.props.user.id)
+            .then(result => {
+                console.log("Only call this once hopefully");
+                this.setState({playlists: result.items})
             });
         }
     }
@@ -35,7 +36,10 @@ export default class Playlists extends React.Component {
             return {
                 playlists: [
                     ...state.playlists,
-                    {id: Math.random.toString(36), name}
+                    {
+                        id: Math.random().toString(16),
+                        name
+                    }
                 ]
             }
         });
