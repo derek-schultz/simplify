@@ -14,6 +14,9 @@ export default class Navbar extends React.Component {
                         <LinkContainer to="/playlists">
                             <Nav.Link>Playlists</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/search">
+                            <Nav.Link>Search</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/timer">
                             <Nav.Link>Timer</Nav.Link>
                         </LinkContainer>

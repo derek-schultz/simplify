@@ -1,6 +1,6 @@
 import React from 'react';
 import CreatePlaylist from './CreatePlaylist';
-import { getPlaylists } from './API';
+import { getPlaylists, createPlaylist } from './API';
 
 export default class Playlists extends React.Component {
     constructor(props) {
@@ -31,29 +31,31 @@ export default class Playlists extends React.Component {
         }
     }
 
-    createPlaylist(name) {        
-        this.setState((state, props) => {
-            return {
-                playlists: [
-                    ...state.playlists,
-                    {
-                        id: Math.random().toString(16),
-                        name
-                    }
-                ]
-            }
+    createPlaylist(name) {
+        createPlaylist(this.props.user.id, name).then(result => {
+            this.setState((state, props) => {
+                return {
+                    playlists: [
+                        {
+                            id: result.id,
+                            name
+                        },
+                        ...state.playlists,
+                    ]
+                }
+            });
         });
     }
 
     render() {
         return (
             <div>
+                <CreatePlaylist onCreate={name => this.createPlaylist(name)} />
                 <ul>
                     {this.state.playlists.map(playlist => {
                         return <li key={playlist.id}>{playlist.name}</li>;
                     })}
                 </ul>
-                <CreatePlaylist onCreate={name => this.createPlaylist(name)} />
             </div>
         );
     }
