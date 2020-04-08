@@ -8,7 +8,14 @@ export default class Login extends React.Component {
         const params = {
           client_id: "59ef645369184c448cddca7422aaeac3",
           response_type: "token",
-          redirect_uri: "http://localhost:3000/authorization"
+          redirect_uri: "http://localhost:3000/authorization",
+          scope: [
+            "playlist-read-private",
+            "playlist-modify-private",
+            "user-follow-read",
+            "user-follow-modify",
+          ].join(' '),
+          show_dialog: true
         };
         return `${authURL}?${queryString.stringify(params)}`;
     }
