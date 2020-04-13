@@ -15,21 +15,26 @@ import {
 
 import history from './history';
 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
-      <Switch>
-        <Route path="/authorization">
-          <Authorization />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <App />
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Switch>
+          <Route path="/authorization">
+            <Authorization />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <App />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

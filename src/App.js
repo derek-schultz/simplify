@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Library from './Library';
 import Timer from './Timer';
 import Search from './Search';
+import PlayerBar from './PlayerBar';
 
 import {
   Switch,
@@ -28,6 +29,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar user={this.state.user} />
+        <PlayerBar />
         <Switch>
           <Route path="/library">
             <Library user={this.state.user} />

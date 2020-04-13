@@ -2,8 +2,10 @@ import React from 'react';
 import { getPlaylist } from './API';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
+import { playTrack } from './redux/actions/playing';
+import { connect } from 'react-redux';
 
-export default class Playlist extends React.Component {
+class Playlist extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +51,7 @@ export default class Playlist extends React.Component {
                     {this.state.playlist.tracks.items.map(data => {
                         const track = data.track;
                         const duration = moment.duration(track.duration_ms);
-                        return <tr key={track.id}>
+                        return <tr key={track.id} onClick={() => this.props.onPlayTrack(track)}>
                             <td>{track.name}</td>
                             <td>{track.artists.map(artist => artist.name).join(', ')}</td>
                             <td>{track.album.name}</td>
@@ -69,3 +71,9 @@ export default class Playlist extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    onPlayTrack: track => dispatch(playTrack(track))
+});
+
+export default connect(null, mapDispatchToProps)(Playlist);
