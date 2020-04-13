@@ -12,7 +12,10 @@ export default class Library extends React.Component {
             <div className="Library">
                 <Playlists user={this.props.user} />
                 <Switch>
-                    <Route path={`/library/:playlistId`} component={(props) => <Playlist {...props} user={this.props.user}/>} />
+                    <Route
+                        path="/library/:playlistId"
+                        component={(props) => <Playlist user={this.props.user} {...props} />}
+                    />
                 </Switch>
             </div>
         );

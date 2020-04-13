@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Library from './Library';
 import Timer from './Timer';
 import Login from './Login';
+import Search from './Search';
 
 import {
   Router,
@@ -41,6 +42,9 @@ class App extends React.Component {
             </Route>
             <Route path="/library">
               <Library user={this.state.user} />
+            </Route>
+            <Route path="/search">
+              <Search />
             </Route>
             <Route path="/timer">
               <Timer />

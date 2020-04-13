@@ -8,16 +8,16 @@ export default class Playlist extends React.Component {
         super(props);
         this.state = {
             playlist: {}
-        }
+        };
     }
-
+    
     componentDidMount() {
         this.updatePlaylist();
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.user !== prevProps.user ||
-                this.props.match.params.playlistId != prevProps.match.params.playlistId) {
+                this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
             this.updatePlaylist();
         }
     }
@@ -35,7 +35,6 @@ export default class Playlist extends React.Component {
     }
 
     renderTracks() {
-        console.log(this.state.playlist.tracks);
         return (
             <Table variant="dark">
                 <thead>
@@ -52,7 +51,7 @@ export default class Playlist extends React.Component {
                         const duration = moment.duration(track.duration_ms);
                         return <tr key={track.id}>
                             <td>{track.name}</td>
-                            <td>{track.artists.map(artist => artist.name).join(", ")}</td>
+                            <td>{track.artists.map(artist => artist.name).join(', ')}</td>
                             <td>{track.album.name}</td>
                             <td>{this.pad(duration.minutes())}:{this.pad(duration.seconds())}</td>
                         </tr>;

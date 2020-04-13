@@ -1,23 +1,24 @@
 import history from './history';
+import queryString from 'query-string';
 
 const SPOTIFY_BASE = "https://api.spotify.com/v1";
 
-export function apiRequest(url, options, data) {
+export function apiRequest(url, options, body) {
     const accessToken = localStorage.getItem('accessToken');
-    const allOptions = {
+    const finalOptions = {
         ...options,
         headers: {
             'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         }
     };
-    if (data !== undefined) {
-        allOptions.body = JSON.stringify(data);
+    if (body !== undefined) {
+        finalOptions.body = JSON.stringify(body);
     }
-    return fetch(`${SPOTIFY_BASE}${url}`, allOptions)
+    return fetch(`${SPOTIFY_BASE}${url}`, finalOptions)
     .then(response => {
         if (response.status > 400) {
-            response.text().then(errorText => console.error(errorText));
+            response.text().then(err => console.error(err));
             if (response.status === 401) {
                 history.push('/login');
             }
@@ -31,12 +32,12 @@ export function getUser() {
     return apiRequest('/me');
 }
 
-export function getPlaylists(userId) {
-    return apiRequest(`/users/${userId}/playlists`);
-}
-
 export function getPlaylist(userId, playlistId) {
     return apiRequest(`/users/${userId}/playlists/${playlistId}`);
+}
+
+export function getPlaylists(userId) {
+    return apiRequest(`/users/${userId}/playlists`);
 }
 
 export function createPlaylist(userId, name) {
@@ -47,5 +48,13 @@ export function createPlaylist(userId, name) {
             name,
             public: false,
         }
-    )
+    );
+}
+
+export function search(query) {
+    const params = queryString.stringify({
+        q: query,
+        type: ['track', 'artist'].join(',')
+    });
+    return apiRequest(`/search?${params}`);
 }

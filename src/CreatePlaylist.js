@@ -1,5 +1,9 @@
 import React from 'react';
-import { FormControl, InputGroup, Button } from 'react-bootstrap';
+import {
+    FormControl,
+    InputGroup,
+    Button
+} from 'react-bootstrap';
 
 export default class CreatePlaylist extends React.Component {
     constructor(props) {
@@ -25,7 +29,7 @@ export default class CreatePlaylist extends React.Component {
         return (
             <InputGroup>
                 <FormControl
-                    placeholder="New playlist name"
+                    placeholder="New playlist"
                     type="text"
                     value={this.state.name}
                     onChange={e => this.updateName(e)}
