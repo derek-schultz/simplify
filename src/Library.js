@@ -14,7 +14,9 @@ export default class Library extends React.Component {
                 <Switch>
                     <Route
                         path="/library/:playlistId"
-                        component={(props) => <Playlist user={this.props.user} {...props} />}
+                        component={(props) => {
+                            return <Playlist user={this.props.user} onPlayTrack={this.props.onPlayTrack} {...props} />;
+                        }}
                     />
                 </Switch>
             </div>

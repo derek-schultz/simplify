@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import Login from './Login';
 import Authorization from './Authorization';
+import { Provider } from 'react-redux';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -14,22 +15,25 @@ import {
 } from "react-router-dom";
 
 import history from './history';
+import store from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
-      <Switch>
-        <Route path="/authorization">
-          <Authorization />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <App />
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Switch>
+          <Route path="/authorization">
+            <Authorization />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <App />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

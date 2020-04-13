@@ -1,7 +1,11 @@
 import React from 'react';
 import NewTodo from "./NewTodo";
 
-export default class Todos extends React.Component {
+import { addTodo } from './redux/actions/todos';
+
+import { connect } from 'react-redux';
+
+class Todos extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,3 +34,13 @@ export default class Todos extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    todos: state.todos,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addTodo: (todo) => dispatch(addTodo(todo))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

@@ -3,6 +3,7 @@
 body {
   background: theme-color-level("dark", -1);
   color: white;
+  padding-bottom: 100px;
 }
 
 .Login {
@@ -17,6 +18,16 @@ body {
   h2 {
     margin-bottom: 30px;
   }
+}
+
+.Player {
+  width: 100%;
+  background: theme-color-level("dark");
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  border-top: solid 1px theme-color("secondary");
+  padding: 20px;
 }
 
 .Playlists {
