@@ -11,8 +11,8 @@ export default class Navbar extends React.Component {
                 <BootstrapNavbar.Brand>Simplify</BootstrapNavbar.Brand>
                 <BootstrapNavbar.Collapse className='justify-content-between'>
                     <Nav>
-                        <LinkContainer to="/playlists">
-                            <Nav.Link>Playlists</Nav.Link>
+                        <LinkContainer to="/library">
+                            <Nav.Link>Library</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/timer">
                             <Nav.Link>Timer</Nav.Link>

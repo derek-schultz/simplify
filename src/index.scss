@@ -4,3 +4,23 @@ body {
   background: theme-color-level("dark", -1);
   color: white;
 }
+
+.Playlists {
+  width: 300px;
+  padding: 20px;
+  background-color: theme-color-level("dark");
+  border-right: solid 1px #333;
+
+  a {
+    color: white;
+  }
+}
+
+.Library {
+  display: flex;
+}
+
+.Playlist {
+  flex: 1;
+  padding: 20px;
+}

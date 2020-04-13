@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormControl, InputGroup, Button } from 'react-bootstrap';
 
 export default class CreatePlaylist extends React.Component {
     constructor(props) {
@@ -22,14 +23,17 @@ export default class CreatePlaylist extends React.Component {
 
     render() {
         return (
-            <div>
-                <input
+            <InputGroup>
+                <FormControl
+                    placeholder="New playlist name"
                     type="text"
                     value={this.state.name}
                     onChange={e => this.updateName(e)}
                 />
-                <button onClick={() => this.sendName()}>Add</button>
-            </div>
+                <InputGroup.Append>
+                    <Button onClick={() => this.sendName()}>Add</Button>
+                </InputGroup.Append>
+            </InputGroup>
         );
     }
 }
