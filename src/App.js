@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
-import Playlists from './Playlists';
+import Library from './Library';
 import Timer from './Timer';
 import Login from './Login';
 import Search from './Search';
@@ -40,8 +40,8 @@ class App extends React.Component {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/playlists">
-              <Playlists user={this.state.user} />
+            <Route path="/library">
+              <Library user={this.state.user} />
             </Route>
             <Route path="/search">
               <Search />

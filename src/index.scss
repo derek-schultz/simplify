@@ -4,3 +4,22 @@ body {
   background: theme-color-level("dark", -1);
   color: white;
 }
+
+.Library {
+  display: flex;
+}
+
+.Playlists {
+  width: 300px;
+  padding: 20px;
+  background-color: theme-color-level("dark", -1);
+
+  a {
+    color: white;
+  }
+}
+
+.Playlist {
+  flex: 1;
+  padding: 20px;
+}

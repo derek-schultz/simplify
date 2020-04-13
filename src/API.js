@@ -32,6 +32,10 @@ export function getUser() {
     return apiRequest('/me');
 }
 
+export function getPlaylist(userId, playlistId) {
+    return apiRequest(`/users/${userId}/playlists/${playlistId}`);
+}
+
 export function getPlaylists(userId) {
     return apiRequest(`/users/${userId}/playlists`);
 }

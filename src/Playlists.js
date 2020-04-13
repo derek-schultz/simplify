@@ -1,6 +1,8 @@
 import React from 'react';
 import CreatePlaylist from './CreatePlaylist';
 import { getPlaylists, createPlaylist } from './API';
+import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default class Playlists extends React.Component {
     constructor(props) {
@@ -51,11 +53,17 @@ export default class Playlists extends React.Component {
         return (
             <div>
                 <CreatePlaylist onCreate={name => this.createPlaylist(name)} />
-                <ul>
-                    {this.state.playlists.map(playlist => {
-                        return <li key={playlist.id}>{playlist.name}</li>;
-                    })}
-                </ul>
+                <Table variant="dark">
+                    <tbody>
+                        {this.state.playlists.map(playlist => {
+                            return <tr key={playlist.id}>
+                                <td>
+                                    <Link to={`/library/${playlist.id}`}>{playlist.name}</Link>
+                                </td>
+                            </tr>;
+                        })}
+                    </tbody>
+                </Table>
             </div>
         );
     }
