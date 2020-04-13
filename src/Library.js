@@ -18,6 +18,6 @@ export default class Library extends React.Component {
                     />
                 </Switch>
             </div>
-        )
+        );
     }
 }

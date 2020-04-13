@@ -27,7 +27,6 @@ export default class Playlists extends React.Component {
         if (this.props.user) {
             getPlaylists(this.props.user.id)
             .then(result => {
-                console.log("Only call this once hopefully");
                 this.setState({playlists: result.items})
             });
         }
@@ -51,7 +50,7 @@ export default class Playlists extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="Playlists">
                 <CreatePlaylist onCreate={name => this.createPlaylist(name)} />
                 <Table variant="dark">
                     <tbody>

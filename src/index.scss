@@ -5,18 +5,19 @@ body {
   color: white;
 }
 
-.Library {
-  display: flex;
-}
-
 .Playlists {
   width: 300px;
   padding: 20px;
-  background-color: theme-color-level("dark", -1);
+  background-color: theme-color-level("dark");
+  border-right: solid 1px #333;
 
   a {
     color: white;
   }
+}
+
+.Library {
+  display: flex;
 }
 
 .Playlist {
