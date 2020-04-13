@@ -2,18 +2,14 @@ import React from 'react';
 import Navbar from './Navbar';
 import Library from './Library';
 import Timer from './Timer';
-import Login from './Login';
 import Search from './Search';
 
 import {
-  Router,
   Switch,
   Route
 } from "react-router-dom";
 
-import Authorization from './Authorization';
 import { getUser } from './API';
-import history from './history';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,28 +26,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={history}>
-        <div className="App">
-          <Navbar user={this.state.user} />
-          <Switch>
-            <Route path="/authorization">
-              <Authorization />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/library">
-              <Library user={this.state.user} />
-            </Route>
-            <Route path="/search">
-              <Search />
-            </Route>
-            <Route path="/timer">
-              <Timer />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <div className="App">
+        <Navbar user={this.state.user} />
+        <Switch>
+          <Route path="/library">
+            <Library user={this.state.user} />
+          </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/timer">
+            <Timer />
+          </Route>
+        </Switch>
+      </div>
     );
   }
 }

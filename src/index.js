@@ -2,11 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
+import Login from './Login';
+import Authorization from './Authorization';
+
 import * as serviceWorker from './serviceWorker';
+
+import {
+  Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import history from './history';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router history={history}>
+      <Switch>
+        <Route path="/authorization">
+          <Authorization />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <App />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

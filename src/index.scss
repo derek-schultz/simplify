@@ -5,6 +5,20 @@ body {
   color: white;
 }
 
+.Login {
+  width: 400px;
+  background: theme-color-level("dark");
+  margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+  padding: 50px;
+  border-radius: 10px;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+}
+
 .Playlists {
   width: 300px;
   padding: 20px;

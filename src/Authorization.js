@@ -19,6 +19,6 @@ export default class Authorization extends React.Component {
     }
 
     render() {
-        return <Redirect to='/' />;
+        return <Redirect to='/library' />;
     }
 }

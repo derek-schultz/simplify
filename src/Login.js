@@ -21,6 +21,11 @@ export default class Login extends React.Component {
     }
 
     render() {
-        return <Button href={this.buildURL()}>Log in with Spotify</Button>
+      return (
+        <div class="Login">
+          <h2>Simplify</h2>
+          <Button href={this.buildURL()}>Log in with Spotify</Button>
+        </div>
+      );
     }
 }
