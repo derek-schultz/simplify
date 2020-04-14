@@ -1,17 +1,8 @@
-import { PLAY_TRACK } from '../actions/playing';
+import { combineReducers } from 'redux';
+import playingReducer from './playing';
+import todosReducer from './todos';
 
-const initialState = {
-    playing: null
-};
-
-export default function(state = initialState, action) {
-    switch(action.type) {
-        case PLAY_TRACK:
-            return {
-                ...state,
-                playing: action.track,
-            };
-        default:
-            return state;
-    }
-}
+export default combineReducers({
+    playing: playingReducer,
+    todos: todosReducer,
+})

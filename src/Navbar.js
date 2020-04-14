@@ -20,6 +20,9 @@ export default class Navbar extends React.Component {
                         <LinkContainer to="/timer">
                             <Nav.Link>Timer</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/todos">
+                            <Nav.Link>Todos</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                     <BootstrapNavbar.Text>
                         {this.props.user ? this.props.user.display_name : null}

@@ -4,6 +4,7 @@ import Library from './Library';
 import Timer from './Timer';
 import Search from './Search';
 import PlayerBar from './PlayerBar';
+import Todos from './Todos';
 
 import {
   Switch,
@@ -39,6 +40,9 @@ class App extends React.Component {
           </Route>
           <Route path="/timer">
             <Timer />
+          </Route>
+          <Route path="/todos">
+            <Todos />
           </Route>
         </Switch>
       </div>
