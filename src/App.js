@@ -11,7 +11,10 @@ import {
   Route
 } from "react-router-dom";
 
+import { connect } from 'react-redux';
+
 import { getUser } from './API';
+import { loadUser } from './redux/actions/spotify';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,13 +26,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.props.loadUser();
     getUser().then(result => this.setState({user: result}));
   }
 
   render() {
     return (
       <div className="App">
-        <Navbar user={this.state.user} />
+        <Navbar />
         <PlayerBar />
         <Switch>
           <Route path="/library">
@@ -50,4 +54,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  loadUser: () => dispatch(loadUser())
+});
+
+export default connect(null, mapDispatchToProps)(App);

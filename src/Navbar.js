@@ -2,9 +2,10 @@ import React from 'react';
 import BootstrapNavbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavItem from 'react-bootstrap/NavItem';
-import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
     render() {
         return (
             <BootstrapNavbar bg="dark" variant="dark">
@@ -25,10 +26,16 @@ export default class Navbar extends React.Component {
                         </LinkContainer>
                     </Nav>
                     <BootstrapNavbar.Text>
-                        {this.props.user ? this.props.user.display_name : null}
+                        {this.props.user.id ? this.props.user.display_name : null}
                     </BootstrapNavbar.Text>
                 </BootstrapNavbar.Collapse>
             </BootstrapNavbar>
         );        
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.spotify.user,
+});
+
+export default connect(mapStateToProps)(Navbar);
