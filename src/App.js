@@ -3,6 +3,8 @@ import Navbar from './Navbar';
 import Library from './Library';
 import Timer from './Timer';
 import Search from './Search';
+import PlayerBar from './PlayerBar';
+import Todos from './Todos';
 
 import {
   Switch,
@@ -28,6 +30,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar user={this.state.user} />
+        <PlayerBar />
         <Switch>
           <Route path="/library">
             <Library user={this.state.user} />
@@ -37,6 +40,9 @@ class App extends React.Component {
           </Route>
           <Route path="/timer">
             <Timer />
+          </Route>
+          <Route path="/todos">
+            <Todos />
           </Route>
         </Switch>
       </div>
