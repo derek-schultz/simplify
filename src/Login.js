@@ -21,8 +21,9 @@ export default class Login extends React.Component {
     }
 
     render() {
+      console.log("render login");
       return (
-        <div class="Login">
+        <div className="Login">
           <h2>Simplify</h2>
           <Button href={this.buildURL()}>Log in with Spotify</Button>
         </div>
