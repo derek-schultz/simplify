@@ -1,35 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { tick } from './redux/actions/timer';
 
-export default class Timer extends React.Component {
+class Timer extends React.Component {
     static ONE_SECOND = 1000;
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            seconds: 0
-        };
-    }
-
     componentDidMount() {
-        this.interval = setInterval(() => this.tick(), Timer.ONE_SECOND);
+        this.interval = setInterval(() => this.props.tick(), Timer.ONE_SECOND);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
-    tick() {
-        this.setState((state, props) => {
-            return {
-                seconds: state.seconds + 1
-            }
-        });
-    }
-
     render() {
         return (
-            <div>00:{this.state.seconds.toString().padStart(2, "0")}</div>
+            <div>00:{this.props.seconds.toString().padStart(2, "0")}</div>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    seconds: state.timer.seconds,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    tick: () => dispatch(tick())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);
