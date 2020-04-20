@@ -1,27 +1,31 @@
-import React from 'react';
-import { getPlaylist } from './API';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
 import { playTrack } from './redux/actions/playing';
 import { loadPlaylist } from './redux/actions/spotify';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-class Playlist extends React.Component {    
-    componentDidMount() {
-        this.props.loadPlaylist(this.props.match.params.playlistId);
-    }
+export default function Playlist(props) {
+    const { playlistId } = useParams();
+    const playlist = useSelector((state) => state.spotify.cachedPlaylists[playlistId]);
+    const dispatch = useDispatch();
 
-    componentDidUpdate(prevProps) {
-        if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
-            this.props.loadPlaylist(this.props.match.params.playlistId);
+    useEffect(() => {
+        if (playlistId) {
+            dispatch(loadPlaylist(playlistId));
         }
-    }
+    }, [playlistId]);
 
-    pad(time) {
+    function pad(time) {
         return time.toString().padStart(2, "0");
     }
 
-    renderTracks() {
+    function onClickTrack(track) {
+        dispatch(playTrack(track));
+    }
+
+    function renderTracks() {
         return (
             <Table variant="dark">
                 <thead>
@@ -33,14 +37,14 @@ class Playlist extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.playlist.tracks.items.map(data => {
+                    {playlist.tracks.items.map(data => {
                         const track = data.track;
                         const duration = moment.duration(track.duration_ms);
-                        return <tr key={track.id} onClick={() => this.props.onPlayTrack(track)}>
+                        return <tr key={track.id} onClick={() => onClickTrack(track)}>
                             <td>{track.name}</td>
                             <td>{track.artists.map(artist => artist.name).join(', ')}</td>
                             <td>{track.album.name}</td>
-                            <td>{this.pad(duration.minutes())}:{this.pad(duration.seconds())}</td>
+                            <td>{pad(duration.minutes())}:{pad(duration.seconds())}</td>
                         </tr>;
                     })}
                 </tbody>
@@ -48,24 +52,9 @@ class Playlist extends React.Component {
         );
     }
 
-    render() {
-        return (
-            <div className="Playlist">
-                {this.props.playlist ? this.renderTracks() : null}
-            </div>
-        );
-    }
+    return (
+        <div className="Playlist">
+            {playlist ? renderTracks() : null}
+        </div>
+    );
 }
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        playlist: state.spotify.cachedPlaylists[ownProps.match.params.playlistId],
-    }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    onPlayTrack: track => dispatch(playTrack(track)),
-    loadPlaylist: playlistId => dispatch(loadPlaylist(playlistId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
