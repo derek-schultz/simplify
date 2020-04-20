@@ -10,7 +10,7 @@ export default class Library extends React.Component {
     render() {
         return (
             <div className="Library">
-                <Playlists user={this.props.user} />
+                <Playlists />
                 <Switch>
                     <Route
                         path="/library/:playlistId"

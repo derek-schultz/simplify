@@ -1,60 +1,25 @@
 import React from 'react';
 import CreatePlaylist from './CreatePlaylist';
-import { getPlaylists, createPlaylist } from './API';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+    loadPlaylists,
+    createPlaylist,
+ } from './redux/actions/spotify';
 
-export default class Playlists extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            playlists: []
-        };
-    }
-
+class Playlists extends React.Component {
     componentDidMount() {
-        this.updatePlaylists();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.user !== this.props.user) {
-            this.updatePlaylists();
-        }
-    }
-
-    updatePlaylists() {
-        if (this.props.user) {
-            getPlaylists(this.props.user.id)
-            .then(result => {
-                this.setState({playlists: result.items})
-            });
-        }
-    }
-
-    createPlaylist(name) {
-        createPlaylist(this.props.user.id, name).then(result => {
-            this.setState((state, props) => {
-                return {
-                    playlists: [
-                        {
-                            id: result.id,
-                            name
-                        },
-                        ...state.playlists,
-                    ]
-                }
-            });
-        });
+        this.props.loadPlaylists();
     }
 
     render() {
         return (
             <div className="Playlists">
-                <CreatePlaylist onCreate={name => this.createPlaylist(name)} />
+                <CreatePlaylist onCreate={name => this.props.createPlaylist(name)} />
                 <Table variant="dark">
                     <tbody>
-                        {this.state.playlists.map(playlist => {
+                        {this.props.playlists.map(playlist => {
                             return <tr key={playlist.id}>
                                 <td>
                                     <Link to={`/library/${playlist.id}`}>{playlist.name}</Link>
@@ -67,3 +32,14 @@ export default class Playlists extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    playlists: state.spotify.playlists,
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    loadPlaylists: () => dispatch(loadPlaylists()),
+    createPlaylist: (name) => dispatch(createPlaylist(name)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playlists);
