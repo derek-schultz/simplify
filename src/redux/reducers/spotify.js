@@ -1,13 +1,14 @@
 import {
     LOAD_USER,
     LOAD_PLAYLISTS,
+    LOAD_PLAYLIST,
     CREATE_PLAYLIST
 } from '../actions/spotify';
 
 const initialState = {
     user: {},
     playlists: [],
-    selectedPlaylist: {},
+    cachedPlaylists: {},
 };
 
 export default function(state = initialState, action) {
@@ -21,6 +22,14 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 playlists: action.playlists,
+            };
+        case LOAD_PLAYLIST:
+            return {
+                ...state,
+                cachedPlaylists: {
+                    ...state.cachedPlaylists,
+                    [action.playlist.id]: action.playlist,
+                }
             };
         case CREATE_PLAYLIST:
             return {

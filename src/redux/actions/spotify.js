@@ -2,6 +2,7 @@ import * as api from '../../API';
 
 export const LOAD_USER = 'LOAD_USER';
 export const LOAD_PLAYLISTS = 'LOAD_PLAYLISTS';
+export const LOAD_PLAYLIST = 'LOAD_PLAYLIST';
 export const CREATE_PLAYLIST = 'CREATE_PLAYLIST';
 
 export function loadUserIfNeeded() {
@@ -52,4 +53,17 @@ export function createPlaylist(name) {
             })
         })
     };
+};
+
+export function loadPlaylist(id) {
+    return (dispatch, getState) => {
+        const state = getState();
+        api.getPlaylist(state.spotify.user.id, id)
+        .then(playlist => {
+            dispatch({
+                type: LOAD_PLAYLIST,
+                playlist,
+            })
+        })
+    }
 };
