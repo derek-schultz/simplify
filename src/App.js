@@ -5,6 +5,7 @@ import Timer from './Timer';
 import Search from './Search';
 import PlayerBar from './PlayerBar';
 import Todos from './Todos';
+import Hook from './Hook';
 
 import {
   Switch,
@@ -47,6 +48,9 @@ class App extends React.Component {
           </Route>
           <Route path="/todos">
             <Todos />
+          </Route>
+          <Route path="/hook">
+            <Hook />
           </Route>
         </Switch>
       </div>

@@ -1,29 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDocumentTitle } from './hooks';
 
-class PlayerBar extends React.Component {
-    renderPlaying() {
+export default function PlayerBar(props) {
+    const playing = useSelector((state) => state.playing);
+    useDocumentTitle(`Playing ${playing ? playing.name : 'nothing'}`);
+
+    function renderPlaying() {
         return (
             <div>
-                <strong>{this.props.playing.name}</strong>
+                <strong>{playing.name}</strong>
                 <br/>
-                {this.props.playing.artists.map(a => a.name).join(', ')}
+                {playing.artists.map(a => a.name).join(', ')}
             </div>
         );
     }
 
-    render() {
-        return (
-            <div className="PlayerBar">
-                {this.props.playing ? this.renderPlaying() : "Nothing playing"}
-            </div>
-        );
-    }
+    return (
+        <div className="PlayerBar">
+            {playing ? renderPlaying() : "Nothing playing"}
+        </div>
+    );
 }
-
-const mapStateToProps = (state, ownProps) => ({
-    playing: state.playing
-});
-
-export default connect(mapStateToProps)(PlayerBar);

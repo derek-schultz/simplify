@@ -24,6 +24,9 @@ class Navbar extends React.Component {
                         <LinkContainer to="/todos">
                             <Nav.Link>Todos</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/hook">
+                            <Nav.Link>Hook</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                     <BootstrapNavbar.Text>
                         {this.props.user.id ? this.props.user.display_name : null}
